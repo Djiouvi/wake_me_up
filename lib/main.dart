@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:injector/injector.dart';
-import 'package:wake_me_up/dart/service/alarmService.dart';
 import 'package:wake_me_up/screens/alarm_list.dart';
 
-import 'dart/repository/AlarmRepository.dart';
+import 'dart/service/configurationInjection.dart';
 
 void main() => {
-      getDependency(),
+      configurationDI(),
       runApp(WakeMeUp()),
     };
 
@@ -23,9 +21,4 @@ class WakeMeUp extends StatelessWidget {
   }
 }
 
-getDependency() {
-  final injector = Injector.appInstance;
 
-  injector.registerSingleton(() => AlarmRepository());
-  injector.registerSingleton(() => AlarmService());
-}
