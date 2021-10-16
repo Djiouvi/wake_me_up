@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
+import 'package:wake_me_up/component/alarm_card.dart';
 import 'package:wake_me_up/dart/entity/Alarm.dart';
 import 'package:wake_me_up/dart/service/alarmService.dart';
 
@@ -18,16 +19,36 @@ class _AlarmPageList extends State<AlarmList> {
       appBar: AppBar(
         title: Text("Super titre"),
       ),
-      body: Center(
-        child: IconButton(
-          icon: const Icon(Icons.android),
-          color: Colors.white,
-          onPressed: () async {
-            var list = await this.alarmService.getAll();
-
-            list.forEach((element) {print(element);});
-          },
-        ),
+      body: ListView(
+        children: [
+          FutureBuilder(
+            future: alarmService.getAll(),
+            builder:
+                (BuildContext context, AsyncSnapshot<List<Alarm>> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: Text('Please waiting...'),
+                );
+              } else {
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Text('Error : ${snapshot.error}'),
+                  );
+                } else {
+                  return Column(
+                    children: [
+                      for (var a in snapshot.data!)
+                        AlarmCard(
+                            description: a.description,
+                            date: a.dateToWakeUp,
+                            active: a.active),
+                    ],
+                  );
+                }
+              }
+            },
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
