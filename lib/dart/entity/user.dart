@@ -1,6 +1,6 @@
-import 'abstract/AbstractBaseAuditableEntity.dart';
+import 'abstract/abstractBaseDataEntity.dart';
 
-class User extends AbstractBaseAuditableEntity {
+class User extends AbstractBaseDataEntity {
   final String nom;
   final String prenom;
   final int active;
@@ -70,6 +70,12 @@ class User extends AbstractBaseAuditableEntity {
       prenom: map['prenom'] as String,
       active: map['active'] as int,
     );
+  }
+
+  @override
+  fromMap(Map<String, dynamic> map) {
+    // TODO: implement fromMap
+    throw UnimplementedError();
   }
 
 //</editor-fold>

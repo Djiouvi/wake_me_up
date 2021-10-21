@@ -1,4 +1,4 @@
-import 'abstract/AbstractBaseDataEntity.dart';
+import 'package:wake_me_up/dart/entity/abstract/abstractBaseDataEntity.dart';
 
 class Alarm extends AbstractBaseDataEntity {
   final String description;

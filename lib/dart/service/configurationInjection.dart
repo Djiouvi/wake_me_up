@@ -1,5 +1,5 @@
 import 'package:injector/injector.dart';
-import 'package:wake_me_up/dart/repository/AlarmRepository.dart';
+import 'package:wake_me_up/dart/repository/alarmRepository.dart';
 
 import 'alarmService.dart';
 

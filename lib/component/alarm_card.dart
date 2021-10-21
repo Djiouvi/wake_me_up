@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wake_me_up/dart/utils/DateUtils.dart';
+import 'package:wake_me_up/dart/utils/dateUtils.dart';
 
-class AlarmCard extends StatelessWidget {
+class AlarmCard extends StatefulWidget {
 
-  String description;
-  DateTime? date;
-  int active;
+  final String description;
+  final DateTime? date;
+  final int active;
 
   AlarmCard({
     required this.description,
@@ -14,6 +14,11 @@ class AlarmCard extends StatelessWidget {
     required this.active,
   });
 
+  @override
+  _AlarmCardState createState() => _AlarmCardState();
+}
+
+class _AlarmCardState extends State<AlarmCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -42,7 +47,7 @@ class AlarmCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                DateUtilsBja.dateTimeToString(date, DateUtilsBja.TIME_FORMAT),
+                DateUtilsBja.dateTimeToString(widget.date, DateUtilsBja.TIME_FORMAT),
                 style: TextStyle(fontSize: 30.0),
               )
             ],
@@ -54,7 +59,7 @@ class AlarmCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    this.description,
+                    this.widget.description,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 18.0,
@@ -72,7 +77,7 @@ class AlarmCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Switch(
-                  value: true,
+                  value: widget.active == 1,
                   onChanged: (value) {
                     print("coucou");
                   })

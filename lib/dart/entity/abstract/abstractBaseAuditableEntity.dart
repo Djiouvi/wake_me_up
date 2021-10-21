@@ -1,4 +1,4 @@
-import 'AbstractBaseIdentifiableEntity.dart';
+import 'abstractBaseIdentifiableEntity.dart';
 
 abstract class AbstractBaseAuditableEntity extends AbstractBaseIdentifiableEntity {
   DateTime? createdAt = DateTime.now();

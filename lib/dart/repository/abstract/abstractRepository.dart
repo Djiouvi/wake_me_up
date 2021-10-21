@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:wake_me_up/dart/entity/abstract/AbstractBaseDataEntity.dart';
+import 'package:wake_me_up/dart/entity/abstract/abstractBaseDataEntity.dart';
 
 abstract class AbstractRepository<T extends AbstractBaseDataEntity> {
   String path = "";
@@ -9,7 +9,10 @@ abstract class AbstractRepository<T extends AbstractBaseDataEntity> {
   final String tableName;
   final int version;
 
-  AbstractRepository({required this.scriptInit, required this.tableName, required this.version}) {
+  AbstractRepository(
+      {required this.scriptInit,
+      required this.tableName,
+      required this.version}) {
     this.path = this.tableName + '.db';
   }
 
@@ -32,13 +35,14 @@ abstract class AbstractRepository<T extends AbstractBaseDataEntity> {
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
-  Future<List<Map<String, dynamic>>> getAll() async {
+  Future<List<Map<String, dynamic>>> getAll(
+      {String? query, String? sort}) async {
     final db = await database;
 
-    return await db.query(tableName);
+    return await db.query(tableName, orderBy: sort);
   }
 
-  Future<dynamic> getOneAlarm(int id) async {
+  Future<dynamic> getOne(double id) async {
     final db = await database;
     return await db.query(
       tableName,
@@ -47,7 +51,7 @@ abstract class AbstractRepository<T extends AbstractBaseDataEntity> {
     );
   }
 
-  Future<void> updateAlarm(T t) async {
+  Future<void> update(T t) async {
     final db = await database;
 
     await db.update(
@@ -58,7 +62,7 @@ abstract class AbstractRepository<T extends AbstractBaseDataEntity> {
     );
   }
 
-  Future<void> deleteAlarm(int id) async {
+  Future<void> delete(double id) async {
     final db = await database;
     await db.delete(
       tableName,

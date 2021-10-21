@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-import 'StringUtils.dart';
+import 'stringUtils.dart';
 
 class DateUtilsBja {
   static const String TIME_FORMAT = 'hh:mm';

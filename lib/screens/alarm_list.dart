@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
 import 'package:wake_me_up/component/alarm_card.dart';
-import 'package:wake_me_up/dart/entity/Alarm.dart';
+import 'package:wake_me_up/dart/entity/alarm.dart';
 import 'package:wake_me_up/dart/service/alarmService.dart';
 
 class AlarmList extends StatefulWidget {
@@ -27,7 +27,7 @@ class _AlarmPageList extends State<AlarmList> {
                 (BuildContext context, AsyncSnapshot<List<Alarm>> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(
-                  child: Text('Please waiting...'),
+                  child: CircularProgressIndicator(),
                 );
               } else {
                 if (snapshot.hasError) {

@@ -1,4 +1,4 @@
-import 'AbstractBaseAuditableEntity.dart';
+import 'abstractBaseAuditableEntity.dart';
 
 abstract class AbstractBaseDataEntity extends AbstractBaseAuditableEntity {
 
