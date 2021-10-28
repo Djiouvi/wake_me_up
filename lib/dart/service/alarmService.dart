@@ -1,6 +1,6 @@
 import 'package:injector/injector.dart';
 import 'package:wake_me_up/dart/entity/abstract/abstractBaseDataEntity.dart';
-import 'package:wake_me_up/dart/entity/alarm.dart';
+import 'package:wake_me_up/dart/entity/alarmEntity.dart';
 import 'package:wake_me_up/dart/repository/abstract/abstractRepository.dart';
 import 'package:wake_me_up/dart/repository/alarmRepository.dart';
 import 'package:wake_me_up/dart/service/abstract/abstractService.dart';
@@ -15,7 +15,21 @@ class AlarmService extends AbstractService<Alarm>{
   @override
   Future<List<Alarm>> getAll({String? query, String? sort}) async {
     String? sort = "active DESC";
-    return await super.getAll(sort: sort);
+    var list = await super.getAll(sort: sort);
+
+    list.sort((a, b) {
+      var active = b.active.compareTo(a.active);
+      if(active != 0) {
+        return active;
+      }
+      var hours = a.dateToWakeUp!.hour.compareTo(b.dateToWakeUp!.hour);
+      if(hours != 0) {
+        return hours;
+      }
+      return a.dateToWakeUp!.minute.compareTo(b.dateToWakeUp!.minute);
+    });
+
+    return list;
   }
 
   Future<void> insert(Alarm alarm) async {
@@ -35,5 +49,9 @@ class AlarmService extends AbstractService<Alarm>{
       active: all[index]['active'],
       description: all[index]['description'],
     );
+  }
+
+  deleteAll() {
+    repository.deleteAll();
   }
 }

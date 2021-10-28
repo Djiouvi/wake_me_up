@@ -10,7 +10,7 @@ class Alarm extends AbstractBaseDataEntity {
   Alarm(
       {id,
       required this.description,
-      this.dateToWakeUp,
+      required this.dateToWakeUp,
       required this.active,
       createdAt,
       createdBy,

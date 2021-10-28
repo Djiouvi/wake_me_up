@@ -1,6 +1,5 @@
-import 'package:wake_me_up/dart/entity/alarm.dart';
-import 'package:wake_me_up/dart/repository/abstract/abstractRepository.dart';
 import 'package:wake_me_up/dart/entity/abstract/abstractBaseDataEntity.dart';
+import 'package:wake_me_up/dart/repository/abstract/abstractRepository.dart';
 
 abstract class AbstractService<T extends AbstractBaseDataEntity> {
 

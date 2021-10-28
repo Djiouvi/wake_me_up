@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:injector/injector.dart';
 import 'package:wake_me_up/component/alarm_card.dart';
-import 'package:wake_me_up/dart/entity/alarm.dart';
+import 'package:wake_me_up/dart/entity/alarmEntity.dart';
 import 'package:wake_me_up/dart/service/alarmService.dart';
 
 class AlarmList extends StatefulWidget {
@@ -50,14 +51,24 @@ class _AlarmPageList extends State<AlarmList> {
           )
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          Alarm alarm = new Alarm(
-              description: "description",
-              dateToWakeUp: DateTime.now(),
-              active: 1);
-          await alarmService.insert(alarm);
-        },
+      floatingActionButton: SpeedDial(
+        icon: IconData(0xe047, fontFamily: 'MaterialIcons'),
+        activeIcon: IconData(0xe16a, fontFamily: 'MaterialIcons'),
+        children: [
+          SpeedDialChild(
+            child: Icon(Icons.flash_on),
+            label: "Test",
+            onTap: () {
+              var alarm = new Alarm(description: "test", dateToWakeUp: DateTime.now(), active: 1);
+              this.alarmService.insert(alarm);
+            },
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.alarm_add),
+            label: "Test",
+            onTap: () => print("Second !"),
+          ),
+        ],
       ),
     );
   }
